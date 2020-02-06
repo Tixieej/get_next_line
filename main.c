@@ -6,7 +6,7 @@
 /*   By: rde-vrie <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 16:57:03 by rde-vrie      #+#    #+#                 */
-/*   Updated: 2020/02/03 13:58:04 by rde-vrie      ########   odam.nl         */
+/*   Updated: 2020/02/06 16:11:42 by rde-vrie      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int		main()
+int		main(void)
 {
 	int		fd;
 	char	*line;
@@ -23,12 +23,11 @@ int		main()
 
 	fd = open("test.txt", O_RDONLY);
 	result = 1;
-	printf("fd = %i\t", fd);
-	if (result == 1)
+	while (result == 1)
 	{
+		printf("voor: fd = %i \t Line = [%s]\n", fd, line);
 		result = get_next_line(fd, &line);
-		printf("\n[%i]--->|", result);
-		printf(" Line: %s\n", line);
+		printf(" [%i]--->| Line: %s\n", result, line);
 		free(line);
 	}
 	return (0);

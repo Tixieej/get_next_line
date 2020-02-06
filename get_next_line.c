@@ -6,42 +6,61 @@
 /*   By: rde-vrie <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 16:41:36 by rde-vrie      #+#    #+#                 */
-/*   Updated: 2020/02/03 15:01:54 by rde-vrie      ########   odam.nl         */
+/*   Updated: 2020/02/06 16:11:37 by rde-vrie      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "get_next_line.h"
 
-#include <stdio.h>//weghalen
-
-/*first_newline()
+#include <stdio.h>
+char	*shift_buffer(char *buffer, int n)
 {
+	int i;
 
-}*/
+	i = 0;
+	while (n + i < BUFFER_SIZE)
+	{
+		buffer[i] = buffer[n + i];
+		i++;
+	}
+	while (i < BUFFER_SIZE)
+	{
+		buffer[i] = '\0';
+		i++;
+	}
+	return (buffer);
+}
 
 int		get_next_line(int fd, char **line)
 {
-	int iets;
-	// hulpfunctie voor bepalen wanneer de eerst \n komt
-	//first_newline();
-	// static buffer
-	// lees 1 keerr en sla op in buffer
-	//zoek in buffer \n
-	//gevonden? sla allse voor de \n op in result
-	//zo nee, verder lezen
-	//pas opnieuw lezen als buffer leeg is
-	//result = malloc();
-//	malloc de buffer aan characters;
-	*line = malloc(sizeof(char));
-//	ret = read(fd, ??, BUFFER_SIZE) ;
-//	check of het is gelukt, zo niet, free;
+	static char buffer[BUFFER_SIZE + 1];
+	int			ret;
+	int			pos;
 
-	iets = read(fd, *line, BUFFER_SIZE);
-	/* ssize_t read(int fildes, void *buf, size_t nbyte)
-	 * read schrijft de SIZE gelezen characters uit fd op het scherm
-	 * slaat hij de rest op in line?*/
-	printf("# gelezen char: [%i]. ", iets);
-	//printf("line is: [%s]\t", *line);
+	ret = 1;
+	*line = malloc(1);
+	if (!(*line))
+		return (-1);
+	**line = '\0';
+	if (*buffer == '\0')
+	{
+		ret = read(fd, buffer, BUFFER_SIZE);
+		if (ret == -1)
+			return (-1);
+	}
+	//printf("ret = %i\n", ret);
+	while (gnl_strchr(buffer, '\n') == -1 && ret != 0)
+	{
+		*line = gnl_strjoin(*line, buffer, BUFFER_SIZE);
+		ret = read(fd, buffer, BUFFER_SIZE);
+		buffer[ret] = '\0';
+	}
+	pos = gnl_strchr(buffer, '\n');
+	*line = gnl_strjoin(*line, buffer, pos);
+	shift_buffer(buffer, pos + 1);
+	if (ret == 0)
+		return (0);
 	return (1);
 }
