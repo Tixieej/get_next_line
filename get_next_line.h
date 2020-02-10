@@ -6,7 +6,7 @@
 /*   By: rde-vrie <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 16:42:29 by rde-vrie      #+#    #+#                 */
-/*   Updated: 2020/02/06 15:37:23 by rde-vrie      ########   odam.nl         */
+/*   Updated: 2020/02/10 14:19:27 by rde-vrie      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define GET_NEXT_LINE_H
 
 int		get_next_line(int fd, char **line);
-char	*shift_buffer(char *buffer, int n);
+void	shift_buffer(char *buffer, int n);
+void	read_till_end(int fd, char **line, char *buffer, int *ret);
 int		ft_strlen(char *s);
-int		gnl_strlcpy(char *dst, char *src, int dstsize);
+char	*gnl_strcpy(char *join, char *s1, char *s2);
 char	*gnl_strjoin(char *s1, char *s2, int n);
 int		gnl_strchr(char *s, char c);
 
