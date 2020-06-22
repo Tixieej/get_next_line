@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   get_next_line_bonus.h                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rde-vrie <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/03 16:57:03 by rde-vrie      #+#    #+#                 */
-/*   Updated: 2020/02/20 09:03:24 by rde-vrie      ########   odam.nl         */
+/*   Created: 2020/02/10 14:15:45 by rde-vrie      #+#    #+#                 */
+/*   Updated: 2020/02/20 09:07:20 by rde-vrie      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdlib.h>
-#include <fcntl.h>
-#include <stdio.h>
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-int		main(void)
-{
-	int		fd;
-	char	*line;
-	int		result;
+int		get_next_line(int fd, char **line);
+void	shift_buffer(char *buffer, int n);
+int		read_till_end(int fd, char **line, char *buffer, int *ret);
+int		ft_strlen(char *s);
+char	*gnl_strcpy(char *join, char *s1, char *s2);
+char	*gnl_strjoin(char *s1, char *s2, int n);
+int		gnl_strchr(char *s, char c);
 
-	fd = open("get_next_line.h", O_RDONLY);
-	//fd = 0;
-	//fd = 42000;
-	result = 1;
-	while (result == 1)
-	{
-		result = get_next_line(fd, &line);
-		printf(" [%i]--->| Line: %s\n", result, line);
-		//if (line)
-		//	free(line);
-	}
-	return (0);
-}
+#endif

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_next_line.c                                    :+:    :+:            */
+/*   get_next_line_bonus.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rde-vrie <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/20 09:06:41 by rde-vrie      #+#    #+#                 */
-/*   Updated: 2020/02/20 09:06:46 by rde-vrie      ########   odam.nl         */
+/*   Created: 2020/02/10 14:08:09 by rde-vrie      #+#    #+#                 */
+/*   Updated: 2020/02/18 16:52:56 by rde-vrie      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <limits.h>
 
 int		read_till_end(int fd, char **line, char *buffer, int *ret)
